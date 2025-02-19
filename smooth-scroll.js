@@ -30,3 +30,5 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && typeo
 } else {
   console.error('One or more libraries (GSAP, ScrollTrigger, or Lenis) are not loaded.');
 }
+
+console.log('test');
