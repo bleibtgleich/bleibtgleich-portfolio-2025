@@ -1,34 +1,18 @@
-if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && typeof window.Lenis !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
+const lenis = new Lenis({ 
+duration: 1.2, 
+easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou 
+direction: 'vertical', // vertical, horizontal 
+gestureDirection: 'vertical', // vertical, horizontal, both 
+smooth: true, 
+mouseMultiplier: 1, 
+smoothTouch: false, 
+touchMultiplier: 2, 
+infinite: false, 
+}) 
 
-  let lenis;
+function raf(time) { 
+lenis.raf(time) 
+requestAnimationFrame(raf) 
+} 
 
-  const initSmoothScrolling = () => {
-    lenis = new window.Lenis({
-      lerp: 0.1,
-      smoothWheel: true,  // Для десктопного скроллинга колесом мыши
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    lenis.on('scroll', ScrollTrigger.update);
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    console.log('Lenis initialized:', lenis);
-  };
-
-  window.addEventListener('load', initSmoothScrolling);
-} else {
-  console.error('One or more libraries (GSAP, ScrollTrigger, or Lenis) are not loaded.');
-}
-
-console.log('test');
+requestAnimationFrame(raf) 
